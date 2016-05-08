@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="inv:invoiceModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+    <!-- description, author, version -->
+    <description>Invoice Model</description>
+    <author>Uros Vukasinovic</author>
+    <version>1.0</version>
+
+    <imports>
+        <!-- Import Alfresco Dictionary Definitions -->
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+        <!-- Import Alfresco Content Domain Model Definitions -->
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+    </imports>
+
+    <!-- Invoice model namespace -->
+    <namespaces>
+        <namespace uri="http://www.grainsek.com/invoiceModel/content/1.0" prefix="inv"/>
+    </namespaces>
+
+    <!-- constraints -->
+    <constraints>
+        <!-- Invoice status constraints -->
+        <constraint name="inv:invoiceStatusConstraints" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value>OPEN</value>
+                    <value>CLOSED</value>
+                </list>
+            </parameter>
+        </constraint>
+
+    </constraints>
+
+    <!-- types -->
+    <types>
+        <type name="inv:invoice">
+            <title>Invoice</title>
+            <description>Invoice metadata</description>
+            <parent>cm:content</parent>
+            <properties>
+                <property name="inv:invoiceID">
+                    <title>ID</title>
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                </property>
+                <property name="inv:invoiceAmount">
+                    <title>Amount</title>
+                    <type>d:double</type>
+                    <mandatory>true</mandatory>
+                </property>
+                <property name="inv:invoiceStatus">
+                    <title>Status</title>
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <default>OPEN</default>
+                    <constraints>
+                        <constraint ref="inv:invoiceStatusConstraints"/>
+                    </constraints>
+                </property>
+            </properties>
+
+        </type>
+    </types>
+
+</model>

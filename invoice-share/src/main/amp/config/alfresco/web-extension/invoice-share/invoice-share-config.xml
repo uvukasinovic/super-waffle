@@ -1,0 +1,27 @@
+<alfresco-config>
+
+    <!-- Document Library config section -->
+    <config evaluator="string-compare" condition="DocumentLibrary">
+        <types>
+            <type name="cm:content">
+                <subtype name="inv:invoice"/>
+            </type>
+        </types>
+
+        <aspects>
+            <!-- Aspects that a user can see -->
+            <visible>
+            </visible>
+
+            <!-- Aspects that a user can add. Same as "visible" if left empty -->
+            <addable>
+            </addable>
+
+            <!-- Aspects that a user can remove. Same as "visible" if left empty -->
+            <removeable>
+            </removeable>
+        </aspects>
+
+    </config>
+
+</alfresco-config>

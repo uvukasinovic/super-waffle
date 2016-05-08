@@ -23,4 +23,18 @@
         </property>
     </bean>
 
+    <!-- Read module specific context -->
+    <bean id="invoice.custom.config" class="org.springframework.extensions.config.ConfigBootstrap"
+          init-method="register">
+        <property name="configService" ref="web.config"/>
+        <property name="configs">
+            <list>
+                <!-- invoice share custom config -->
+                <value>classpath:alfresco/web-extension/${project.artifactId}/invoice-share-config.xml</value>
+                <value>classpath:alfresco/web-extension/${project.artifactId}/invoice-form-config.xml</value>
+            </list>
+        </property>
+    </bean>
+
+
 </beans>

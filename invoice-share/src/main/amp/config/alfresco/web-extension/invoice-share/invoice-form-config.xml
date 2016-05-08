@@ -1,0 +1,33 @@
+<alfresco-config>
+
+    <!-- Invoice edit form configuration -->
+    <config evaluator="node-type" condition="inv:invoice">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="cm:name"/>
+                    <show id="inv:invoiceID"/>
+                    <show id="inv:invoiceAmount"/>
+                    <show id="inv:invoiceStatus"/>
+                    <show id="cm:content"/>
+                </field-visibility>
+            </form>
+        </forms>
+    </config>
+
+    <!-- Invoice create form configuration -->
+    <config evaluator="model-type" condition="inv:invoice">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="cm:name"/>
+                    <show id="inv:invoiceID"/>
+                    <show id="inv:invoiceAmount"/>
+                    <show id="inv:invoiceStatus"/>
+                    <show id="cm:content"/>
+                </field-visibility>
+            </form>
+        </forms>
+    </config>
+
+</alfresco-config>
