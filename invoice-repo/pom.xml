@@ -79,8 +79,23 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.sharextras</groupId>
+            <artifactId>javascript-console-repo</artifactId>
+            <version>1.0</version>
+            <type>amp</type>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-archiver</artifactId>
+            <version>2.4.1</version>
+        </dependency>
     </dependencies>
 
+    <!-- This repository is only needed to retrieve Alfresco parent POM. NOTE: This can be removed when/if Alfresco will be
+    on Maven Central NOTE: The repository to be used for Alfresco Enterprise artifacts is https://artifacts.alfresco.com/nexus/content/groups/private/.
+    Please check with Alfresco Support to get credentials to add to your ~/.m2/settings.xml if you are a Enterprise customer
+    or Partner -->
     <profiles>
         <!--
             Brings in the extra Enterprise specific repository classes,
@@ -96,6 +111,53 @@
                     <scope>provided</scope>
                 </dependency>
             </dependencies>
+        </profile>
+        <!-- This profile applies amps from dependencies to the alfresco war -->
+        <profile>
+            <id>unpack-deps</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.alfresco.maven.plugin</groupId>
+                        <artifactId>alfresco-maven-plugin</artifactId>
+                        <version>2.2.0</version>
+                        <executions>
+                            <execution>
+                                <id>install-amps</id>
+                                <goals>
+                                    <goal>install</goal>
+                                </goals>
+                                <phase>package</phase>
+                                <configuration>
+                                    <ampLocation>${project.build.directory}/amp</ampLocation>
+                                </configuration>
+                            </execution>
+
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>2.10</version>
+                        <executions>
+                            <execution>
+                                <id>copy-dependencies</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <includeTypes>amp</includeTypes>
+                                    <outputDirectory>${project.build.directory}/amp</outputDirectory>
+                                    <overWriteReleases>true</overWriteReleases>
+                                    <overWriteSnapshots>true</overWriteSnapshots>
+                                    <overWriteIfNewer>true</overWriteIfNewer>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 </project>
