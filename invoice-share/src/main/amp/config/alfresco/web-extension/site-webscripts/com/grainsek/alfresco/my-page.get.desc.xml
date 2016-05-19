@@ -1,0 +1,6 @@
+<webscript>
+    <shortname>My Page</shortname>
+    <description>My page definition</description>
+    <family>Share</family>
+    <url>/my-page</url>
+</webscript>
